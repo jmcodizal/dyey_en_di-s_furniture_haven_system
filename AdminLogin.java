@@ -1,0 +1,292 @@
+
+package UI;
+
+import java.sql.SQLException;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import UI.CustomerAdminDashboard;
+import UI.AdminSignupPanel;
+import DB.DBConnector;
+import OrderingSystem.SessionManager;
+import UI.AdminDashboard;
+import java.awt.HeadlessException;
+import java.time.LocalDateTime;
+
+public class AdminLogin extends javax.swing.JFrame {
+Connection conn;
+PreparedStatement pst;
+ResultSet rst;
+   
+    public AdminLogin() {
+        initComponents();
+        conn = DBConnector.getCon();
+        
+    }
+
+     public void ClearButton() {
+        txtEmail.setText("");
+        txtPassword.setText("");
+     }
+   
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        PasswordLabel = new javax.swing.JLabel();
+        EmailLabel = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        LoginButton = new javax.swing.JButton();
+        ClearButton = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
+        ForgotPasswordButton = new javax.swing.JButton();
+        SignupButton = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Serif", 0, 28)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Admin Login");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 160, 40));
+
+        PasswordLabel.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
+        PasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        PasswordLabel.setText("Password:");
+        getContentPane().add(PasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 120, 30));
+
+        EmailLabel.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
+        EmailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        EmailLabel.setText("Username or email:");
+        getContentPane().add(EmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 180, 30));
+
+        txtEmail.setBackground(new java.awt.Color(255, 252, 248));
+        txtEmail.setForeground(new java.awt.Color(33, 33, 33));
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, 350, 40));
+
+        LoginButton.setBackground(new java.awt.Color(101, 101, 101));
+        LoginButton.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        LoginButton.setForeground(new java.awt.Color(255, 255, 255));
+        LoginButton.setText("Login");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoginButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 340, 180, 50));
+
+        ClearButton.setBackground(new java.awt.Color(101, 101, 101));
+        ClearButton.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        ClearButton.setForeground(new java.awt.Color(255, 255, 255));
+        ClearButton.setText("Clear");
+        ClearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ClearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 340, 180, 50));
+
+        ExitButton.setBackground(new java.awt.Color(180, 100, 100));
+        ExitButton.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        ExitButton.setForeground(new java.awt.Color(255, 255, 255));
+        ExitButton.setText("Exit");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ExitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 340, 180, 50));
+
+        ForgotPasswordButton.setBackground(new java.awt.Color(101, 101, 101));
+        ForgotPasswordButton.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        ForgotPasswordButton.setForeground(new java.awt.Color(255, 255, 255));
+        ForgotPasswordButton.setText("Forgot Password");
+        ForgotPasswordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ForgotPasswordButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ForgotPasswordButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, 180, 50));
+
+        SignupButton.setBackground(new java.awt.Color(101, 101, 101));
+        SignupButton.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        SignupButton.setForeground(new java.awt.Color(255, 255, 255));
+        SignupButton.setText("Signup");
+        SignupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignupButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(SignupButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 410, 180, 50));
+
+        txtPassword.setBackground(new java.awt.Color(255, 252, 248));
+        txtPassword.setForeground(new java.awt.Color(33, 33, 33));
+        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 260, 350, 40));
+
+        jLabel5.setFont(new java.awt.Font("Serif", 3, 40)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("                   DYEY EN DI'S FURNITURE HAVEN");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 890, 50));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 700));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+       
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+    String EmailOrUsername = txtEmail.getText(); 
+    String Password = txtPassword.getText();
+
+    try {
+        pst = conn.prepareStatement("SELECT * FROM admin WHERE (Email = ? OR Username = ?) AND Password = ?");
+        pst.setString(1, EmailOrUsername);
+        pst.setString(2, EmailOrUsername);
+        pst.setString(3, Password);
+
+        rst = pst.executeQuery();
+
+        if (rst.next()) {
+            int adminID = rst.getInt("AdminID");
+            String Username = rst.getString("Username"); 
+
+            SessionManager.setAdminID(adminID);
+            SessionManager.loggedInCustomerID = adminID;
+
+            LocalDateTime now = LocalDateTime.now();
+            Timestamp loginTimestamp = Timestamp.valueOf(now);
+
+            CallableStatement stmt = conn.prepareCall("{CALL InsertAdminLogin(?, ?)}");
+            stmt.setInt(1, adminID);
+            stmt.setTimestamp(2, loginTimestamp);
+            stmt.execute();
+
+           
+            String sqlAudit = "INSERT INTO audit_logs (UserType, Username, ActionType, TableAffected, RecordID, ActionDetails) VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement pstmtAudit = conn.prepareStatement(sqlAudit)) {
+                pstmtAudit.setString(1, "Admin");
+                pstmtAudit.setString(2, Username);
+                pstmtAudit.setString(3, "Login");
+                pstmtAudit.setString(4, "admin");
+                pstmtAudit.setInt(5, adminID);
+                pstmtAudit.setString(6, "Admin logged in successfully");
+                pstmtAudit.executeUpdate();
+            }
+           
+
+            JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+            String loggedInUsername = rst.getString("Username");
+            System.out.println("✔ Logged in as: " + loggedInUsername);
+            AdminDashboard obj = new AdminDashboard(loggedInUsername);
+            obj.setVisible(true);
+            dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid email/username or password. Please try again.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_LoginButtonActionPerformed
+
+    private void ClearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearButtonActionPerformed
+        ClearButton();
+    }//GEN-LAST:event_ClearButtonActionPerformed
+
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        CustomerAdminDashboard obj = new CustomerAdminDashboard();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ExitButtonActionPerformed
+
+    private void ForgotPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForgotPasswordButtonActionPerformed
+        String input = JOptionPane.showInputDialog(this, "Enter your registered email or username:");
+    
+    if (input == null || input.trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Email cannot be empty!");
+        return;
+    }
+    
+    try {
+   
+        String query = "SELECT * FROM admin WHERE Email = ? OR Username = ?";
+        PreparedStatement Pst = conn.prepareStatement(query);
+        Pst.setString(1, input);
+         Pst.setString(2, input);
+        ResultSet rs = Pst.executeQuery();
+        
+        if (rs.next()) {
+            String newPassword = JOptionPane.showInputDialog(this, "Enter new password:");
+            String confirmPassword = JOptionPane.showInputDialog(this, "Confirm new password:");
+            
+            if (newPassword == null || confirmPassword == null || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Password fields cannot be empty!");
+                return;
+            }
+            
+            if (!newPassword.equals(confirmPassword)) {
+                JOptionPane.showMessageDialog(this, "Passwords do not match!");
+                return;
+            }
+            
+            String updateQuery = "UPDATE admin SET Password = ? WHERE Email = ? OR Username = ?";
+            PreparedStatement updatePst = conn.prepareStatement(updateQuery);
+            updatePst.setString(1, newPassword);
+            updatePst.setString(2, input);
+            updatePst.setString(3, input);
+            updatePst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(this, "Password updated successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Email not found in the database!");
+        }
+        
+       
+    } catch (HeadlessException | SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
+    }//GEN-LAST:event_ForgotPasswordButtonActionPerformed
+
+    private void SignupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignupButtonActionPerformed
+        AdminSignupPanel obj = new AdminSignupPanel();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_SignupButtonActionPerformed
+
+    
+    public static void main(String args[]) {
+       
+        java.awt.EventQueue.invokeLater(() -> {
+            new AdminLogin().setVisible(true);
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ClearButton;
+    private javax.swing.JLabel EmailLabel;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JButton ForgotPasswordButton;
+    private javax.swing.JButton LoginButton;
+    private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JButton SignupButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JPasswordField txtPassword;
+    // End of variables declaration//GEN-END:variables
+}
